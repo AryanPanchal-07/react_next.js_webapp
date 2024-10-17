@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
+import products from "../products.json";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,6 +24,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      
       <div
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
@@ -41,7 +43,22 @@ export default function Home() {
             </li>
             <li>Save and see your changes instantly.</li>
           </ol>
-
+          <div className={styles.grid}>
+        {
+          products.map(product => {
+            return(
+              <div key={product.id} className={styles.card}>
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+                <p>${product.price}</p>
+                <p>
+                  <button>Add to cart</button>
+                </p>
+              </div>
+            );
+          })
+        }
+      </div>
           <div className={styles.ctas}>
             <a
               className={styles.primary}
